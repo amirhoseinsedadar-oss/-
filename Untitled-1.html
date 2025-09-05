@@ -75,26 +75,21 @@
       background:linear-gradient(180deg, #34d399, #10b981);
       color:#fff; position:relative; z-index:2;
     }
-    .btn-yes:focus{ outline:3px solid rgba(16,185,129,.25) }
     .btn-yes:hover{ transform:translateY(-2px) scale(1.02) }
 
-    /* دکمه نه - فراری 😅 */
     .no-wrap{ position:absolute; inset:0; }
     .btn-no{
       position:absolute; inset:auto; left:38%; top:54%;
       background:#fff; color:#ef4444; border:2px dashed #fecaca;
       z-index:3;
     }
-    .btn-no:focus{ outline:3px solid rgba(239,68,68,.15) }
 
-    /* وقتی روی خود دکمه یا محدوده‌ی اطرافش برویم، شروع می‌کند به جابه‌جایی */
     .no-wrap:hover .btn-no,
     .btn-no:hover{
       animation: escape 1.1s ease-in-out infinite alternate;
-      pointer-events:auto; /* هنوز قابل کلیک هست ولی سخت! */
+      pointer-events:auto;
     }
 
-    /* انیمیشن جابه‌جایی در چند مسیر برای سخت‌تر شدن کلیک */
     @keyframes escape{
       0%   { transform: translate(-40px, -30px) rotate(-2deg) }
       25%  { transform: translate(120px, -70px) rotate(3deg) }
@@ -103,7 +98,6 @@
       100% { transform: translate(-120px, -10px) rotate(-3deg) }
     }
 
-    /* مود موفقیت با :target (بدون جاوااسکریپت) */
     .success{
       position:fixed; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.25);
       opacity:0; pointer-events:none; transition:opacity .2s ease;
@@ -132,7 +126,7 @@
   <main class="card" aria-live="polite">
     <div class="sparkles" aria-hidden="true"></div>
 
-    <h1>میای خانومم باشی؟ 🥺💕</h1>
+    <h1>میای دوست‌م باشی؟ 🥺💕</h1>
     <p class="lead">قول می‌دم هم شنونده‌ی خوب باشم هم رفیق خفن! 😇</p>
 
     <div class="question" role="status" aria-label="سوال">
@@ -151,18 +145,20 @@
     </div>
   </main>
 
-  <!-- مود موفقیت بدون JS -->
   <div class="success" id="yay" role="dialog" aria-modal="true" aria-labelledby="yay-title">
     <div>
       <h2 id="yay-title">هورا! 🥳</h2>
-      <p>از همین لحظه رسماً زنم شدی! یه پیام بده بهم ☕️✨</p>
+      <p>از همین لحظه رسماً دوستیمون شروع شد! یه پیام بده که برنامه بچینیم ☕️✨</p>
       <a class="btn btn-yes" href="#">باشه 😄</a>
     </div>
   </div>
+
+  <script>
+    // فقط نمایش مود تبریک، بدون هیچ ارتباط با سرور یا پیام‌رسان
+    document.querySelector(".btn-yes").addEventListener("click", function(e){
+      // اگر می‌خوای JS کاملاً بی‌صدا باشه، هیچ کاری انجام نمی‌ده، فقط مود باز می‌شود
+      window.location.hash = "yay";
+    });
+  </script>
 </body>
-	
-
-
-	
 </html>
-
