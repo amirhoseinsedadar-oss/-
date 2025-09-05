@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>قبول می‌کنی دوست‌م باشی؟ 💖</title>
+  <style>
+    :root{
+      --bg: #fff6fb;
+      --card: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #ec4899;
+      --primary-2: #f472b6;
+      --ring: rgba(236,72,153,.25);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, "Vazirmatn", "IRANSans", sans-serif;
+      background: radial-gradient(1200px 600px at 20% 15%, #ffe0ef 0%, var(--bg) 45%),
+                  radial-gradient(1200px 700px at 100% 100%, #ffeaf4 0%, var(--bg) 40%);
+      color:var(--text);
+      display:grid;
+      place-items:center;
+    }
+
+    .card{
+      width:min(680px, 92vw);
+      background:var(--card);
+      border-radius:28px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(236,72,153,.15), 0 6px 18px rgba(0,0,0,.06);
+      border:1px solid #ffe3f3;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .sparkles{
+      position:absolute; inset:0; pointer-events:none; opacity:.2;
+      background:
+        radial-gradient(6px 6px at 15% 25%, #f43f5e 0 50%, transparent 52%),
+        radial-gradient(6px 6px at 85% 35%, #22c55e 0 50%, transparent 52%),
+        radial-gradient(6px 6px at 35% 85%, #8b5cf6 0 50%, transparent 52%),
+        radial-gradient(6px 6px at 75% 75%, #06b6d4 0 50%, transparent 52%);
+      filter: blur(.5px);
+      z-index:0;
+    }
+
+    h1{
+      margin:6px 0 4px; font-size:clamp(26px, 4.5vw, 36px); line-height:1.2;
+    }
+    p.lead{
+      margin:0; color:var(--muted); font-size:clamp(14px, 2.8vw, 16px);
+    }
+
+    .question{
+      margin:22px 0 18px;
+      background:linear-gradient(90deg, var(--primary), var(--primary-2));
+      color:#fff; padding:14px 18px; border-radius:18px; display:inline-flex; gap:10px; align-items:center;
+      box-shadow:0 10px 20px var(--ring);
+    }
+
+    .btns{ position:relative; height:220px; margin-top:10px; }
+
+    .btn{
+      appearance:none; border:none; cursor:pointer; font-weight:700;
+      padding:14px 22px; border-radius:999px; font-size:18px;
+      transition:transform .15s ease, box-shadow .15s ease, background-color .2s ease;
+      box-shadow:0 6px 18px rgba(0,0,0,.08);
+    }
+
+    .btn-yes{
+      background:linear-gradient(180deg, #34d399, #10b981);
+      color:#fff; position:relative; z-index:2;
+    }
+    .btn-yes:focus{ outline:3px solid rgba(16,185,129,.25) }
+    .btn-yes:hover{ transform:translateY(-2px) scale(1.02) }
+
+    /* دکمه نه - فراری 😅 */
+    .no-wrap{ position:absolute; inset:0; }
+    .btn-no{
+      position:absolute; inset:auto; left:38%; top:54%;
+      background:#fff; color:#ef4444; border:2px dashed #fecaca;
+      z-index:3;
+    }
+    .btn-no:focus{ outline:3px solid rgba(239,68,68,.15) }
+
+    /* وقتی روی خود دکمه یا محدوده‌ی اطرافش برویم، شروع می‌کند به جابه‌جایی */
+    .no-wrap:hover .btn-no,
+    .btn-no:hover{
+      animation: escape 1.1s ease-in-out infinite alternate;
+      pointer-events:auto; /* هنوز قابل کلیک هست ولی سخت! */
+    }
+
+    /* انیمیشن جابه‌جایی در چند مسیر برای سخت‌تر شدن کلیک */
+    @keyframes escape{
+      0%   { transform: translate(-40px, -30px) rotate(-2deg) }
+      25%  { transform: translate(120px, -70px) rotate(3deg) }
+      50%  { transform: translate(-90px, 30px) rotate(-4deg) }
+      75%  { transform: translate(150px, 60px) rotate(2deg) }
+      100% { transform: translate(-120px, -10px) rotate(-3deg) }
+    }
+
+    /* مود موفقیت با :target (بدون جاوااسکریپت) */
+    .success{
+      position:fixed; inset:0; display:grid; place-items:center; background:rgba(0,0,0,.25);
+      opacity:0; pointer-events:none; transition:opacity .2s ease;
+    }
+    .success > div{
+      background:#fff; padding:28px; border-radius:22px; text-align:center; width:min(520px, 92vw);
+      box-shadow:0 22px 50px rgba(0,0,0,.25);
+    }
+    .success h2{ margin:0 0 6px }
+    .success p{ margin:0 0 12px; color:var(--muted) }
+    .success a{ text-decoration:none }
+    #yay:target{ opacity:1; pointer-events:auto }
+
+    .row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+
+    .hint{ font-size:12px; color:#9ca3af; margin-top:12px }
+
+    @media (max-width: 520px){
+      .btns{ height:260px }
+      .btn{ font-size:16px; padding:12px 18px }
+      .btn-no{ left:30%; top:58% }
+    }
+  </style>
+</head>
+<body>
+  <main class="card" aria-live="polite">
+    <div class="sparkles" aria-hidden="true"></div>
+
+    <h1>میای خانومم باشی؟ 🥺💕</h1>
+    <p class="lead">قول می‌دم هم شنونده‌ی خوب باشم هم رفیق خفن! 😇</p>
+
+    <div class="question" role="status" aria-label="سوال">
+      <span>انتخابت چیه؟</span>
+    </div>
+
+    <div class="row">
+      <a class="btn btn-yes" href="#yay" aria-label="بله">بله 😍</a>
+      <span class="hint">(پیشنهاد می‌کنم روی «بله» بزنیا 😉)</span>
+    </div>
+
+    <div class="btns">
+      <div class="no-wrap" aria-hidden="true">
+        <button class="btn btn-no" type="button">نه 🙈</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- مود موفقیت بدون JS -->
+  <div class="success" id="yay" role="dialog" aria-modal="true" aria-labelledby="yay-title">
+    <div>
+      <h2 id="yay-title">هورا! 🥳</h2>
+      <p>از همین لحظه رسماً زنم شدی! یه پیام بده بهم ☕️✨</p>
+      <a class="btn btn-yes" href="#">باشه 😄</a>
+    </div>
+  </div>
+</body>
+	
+<script>
+document.querySelector(".btn-yes").addEventListener("click", function (e) {
+  e.preventDefault();
+
+  // ارسال پیام به سرور Flask
+  fetch("http://127.0.0.1:5000/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message: "کاربر روی بله کلیک کرد 💖" })
+  })
+  .catch(err => console.log("خطا در اتصال به سرور:", err));
+
+  // نمایش مود تبریک بدون هیچ alert
+  window.location.hash = "yay";
+});
+</script>
+
+	
+</html>
