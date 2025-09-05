@@ -161,22 +161,8 @@
   </div>
 </body>
 	
-<script>
-document.querySelector(".btn-yes").addEventListener("click", function (e) {
-  e.preventDefault();
 
-  // ارسال پیام به سرور Flask
-  fetch("http://127.0.0.1:5000/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message: "کاربر روی بله کلیک کرد 💖" })
-  })
-  .catch(err => console.log("خطا در اتصال به سرور:", err));
-
-  // نمایش مود تبریک بدون هیچ alert
-  window.location.hash = "yay";
-});
-</script>
 
 	
 </html>
+
